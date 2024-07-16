@@ -1,0 +1,15 @@
+{
+  "name": "ahorcado",
+  "version": "1.0.0",
+  "description": "Juego de Ahorcado",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^27.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

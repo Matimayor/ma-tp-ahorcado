@@ -1,0 +1,34 @@
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
+#game {
+  text-align: center;
+}
+
+#word {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+#incorrect-letters {
+  color: red;
+}
+
+#guess-input {
+  font-size: 1em;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+#guess-button {
+  font-size: 1em;
+  padding: 5px 10px;
+}
