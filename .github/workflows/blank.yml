@@ -30,4 +30,5 @@ jobs:
     - name: Run tests with coverage
       run: |
         npm test -- --coverage --coverageReporters=text-summary
-        cat ./coverage/lcov-report/index.html | grep -o 'Statements\s*<span class="strong">[0-9]*.[0-9]*%<\/span>' | grep -o '[0-9]*.[0-9]*%'
+        cat ./coverage/lcov-report/index.html | grep -o 'Lines\s*<span class="strong">[0-9]*.[0-9]*%<\/span>' | grep -o '[0-9]*.[0-9]*%'
+
