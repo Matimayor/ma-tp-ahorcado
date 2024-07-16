@@ -5,7 +5,6 @@ module.exports = {
   collectCoverage: true, // Activar la recolección de cobertura
   coverageReporters: [
     'text-summary', // Mostrar resumen de cobertura como texto
-    'html', 
   ],
  
 };
