@@ -1,4 +1,4 @@
-const Ahorcado = require('./ahorcado')
+const Ahorcado = require('./ahorcado');
 
 test('debería iniciar el juego con una palabra oculta de un conjunto de palabras', () => {
   const palabras = ['javascript', 'programacion', 'desarrollo'];

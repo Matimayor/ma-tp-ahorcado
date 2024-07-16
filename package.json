@@ -1,5 +1,5 @@
 {
-  "name": "ahorcado",
+  "name": "hangman",
   "version": "1.0.0",
   "description": "Juego de Ahorcado",
   "main": "index.js",
