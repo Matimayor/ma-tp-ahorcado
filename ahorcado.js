@@ -1,7 +1,7 @@
 class Ahorcado {
-  constructor(palabras) {
+  constructor(palabras, palabraParaPrueba = null) {
     this.palabras = palabras;
-    this.palabra = this.seleccionarPalabra();
+    this.palabra = palabraParaPrueba || this.seleccionarPalabra();
     this.estado = '_'.repeat(this.palabra.length);
     this.letrasIncorrectas = [];
     this.intentos = 0;
@@ -23,7 +23,7 @@ class Ahorcado {
     this.letrasIncorrectas = [];
     this.letrasCorrectas = [];
   }
-  
+
   adivinar(letra) {
     if (this.palabra.includes(letra)) {
       let nuevoEstado = '';

@@ -1,16 +1,21 @@
-/* styles.css */
+
 body {
-  font-family: Arial, sans-serif;
+  background-color: #4a4063;
+  color: #fff;
+  font-family: 'SF Pixelate', sans-serif;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #f5f5f5;
 }
 
 #game {
   text-align: center;
+}
+
+.letter {
+  border-bottom: 2px solid #000; 
+  padding: 0 5px; 
 }
 
 #word {
@@ -19,16 +24,28 @@ body {
 }
 
 #incorrect-letters {
-  color: red;
+  color: rgb(194, 31, 31);
 }
 
 #guess-input {
   font-size: 1em;
   padding: 5px;
   margin-right: 10px;
+  width: 300px;
+    padding: 10px;
 }
 
 #guess-button {
-  font-size: 1em;
-  padding: 5px 10px;
+  margin-top: 20px;
+    appearance: none;
+    font-family: 'SF Pixelate', sans-serif;
+    border: none;
+    width: 300px;
+    padding: 10px;
+    background: #d95d39;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
 }
