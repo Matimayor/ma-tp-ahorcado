@@ -4,7 +4,8 @@
   "description": "Juego de Ahorcado",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest", 
+    "cy:run": "cypress run"
   },
   "devDependencies": {
     "cypress": "^13.13.1",

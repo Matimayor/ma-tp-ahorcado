@@ -35,7 +35,7 @@ describe('Juego de Ahorcado', () => {
     cy.get('#message').should('contain.text', '¡Has ganado!');
   });
 
-  it('debería indicar cuando el jugador ha perdido', () => {
+  it('debería indicar cuando el jugador ha perdido', () => {  
     cy.get('#guess-input').should('not.be.disabled').then(() => {
       cy.get('#guess-input').type('x');
     });
