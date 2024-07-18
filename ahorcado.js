@@ -5,6 +5,7 @@ class Ahorcado {
     this.estado = '_'.repeat(this.palabra.length);
     this.letrasIncorrectas = [];
     this.intentos = 0;
+    this.vidasRestantes = 6; // Inicializamos con 6 vidas
   }
 
   seleccionarPalabra() {
@@ -18,10 +19,10 @@ class Ahorcado {
 
   reiniciar() {
     this.palabra = this.seleccionarPalabra();
-    this.estado = Array(this.palabra.length).fill('_').join('');
+    this.estado = '_'.repeat(this.palabra.length);
     this.intentos = 0;
     this.letrasIncorrectas = [];
-    this.letrasCorrectas = [];
+    this.vidasRestantes = 6; // Reiniciamos las vidas a 6
   }
 
   adivinar(letra) {
@@ -38,6 +39,7 @@ class Ahorcado {
     } else {
       this.letrasIncorrectas.push(letra);
       this.intentos++;
+      this.vidasRestantes--; // Decrementamos las vidas restantes
     }
   }
 
@@ -50,7 +52,11 @@ class Ahorcado {
   }
 
   esPerdedor() {
-    return this.intentos >= 6; // 6 intentos incorrectos como límite
+    return this.vidasRestantes <= 0; // Ajustamos la condición de derrota
+  }
+
+  getVidasRestantes() {
+    return this.vidasRestantes;
   }
 }
 

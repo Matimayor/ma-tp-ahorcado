@@ -4,13 +4,15 @@
   "description": "Juego de Ahorcado",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "cy:run": "cypress run"   
+    "test": "jest --coverage",
+    "cy:run": "cypress run"
   },
   "devDependencies": {
     "cypress": "^13.13.1",
     "jest": "^27.0.0"
   },
-  "author": "",
-  "license": "ISC"
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": ["text", "lcov"]
+  }
 }

@@ -25,9 +25,12 @@ jobs:
       run: npm install
 
     - name: Run unit tests with Jest
-      run: npm test
+      run: npm test -- --coverage
 
     - name: Run acceptance tests with Cypress
-      run: npm run cy:run       
+      run: npm run cy:run
 
+    - name: Display coverage report
+      run: cat ./coverage/lcov-report/index.html
+      continue-on-error: true
 
