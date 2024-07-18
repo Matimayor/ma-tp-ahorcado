@@ -1,5 +1,7 @@
 const Ahorcado = require('./ahorcado');
 
+// Pruebas existentes...
+
 test('debería iniciar el juego con una palabra oculta de un conjunto de palabras', () => {
   const palabras = ['javascript', 'programacion', 'desarrollo'];
   const juego = new Ahorcado(palabras);
@@ -86,4 +88,44 @@ test('Debe reconocer cuando se ha perdido el juego', () => {
   const letrasIncorrectas = ['b', 'c', 'd', 'e', 'f', 'g'];
   letrasIncorrectas.forEach(letra => game.adivinar(letra));
   expect(game.esPerdedor()).toBe(true);
+});
+
+// Nuevas pruebas para restricciones de entrada
+
+test('No debería permitir ingresar números', () => {
+  const palabras = ['javascript'];
+  const juego = new Ahorcado(palabras);
+  juego.adivinar('1');
+  expect(juego.getEstado()).toBe('__________');
+  expect(juego.getLetrasIncorrectas()).toEqual([]);
+  expect(juego.intentos).toBe(0);
+});
+
+test('No debería permitir ingresar signos especiales', () => {
+  const palabras = ['javascript'];
+  const juego = new Ahorcado(palabras);
+  juego.adivinar('@');
+  expect(juego.getEstado()).toBe('__________');
+  expect(juego.getLetrasIncorrectas()).toEqual([]);
+  expect(juego.intentos).toBe(0);
+});
+
+test('No debería permitir ingresar letras repetidas', () => {
+  const palabras = ['javascript'];
+  const juego = new Ahorcado(palabras);
+  juego.adivinar('j');
+  juego.adivinar('j'); // Intento de adivinar la misma letra
+  expect(juego.getEstado()).toBe('j_________');
+  expect(juego.getLetrasIncorrectas()).toEqual([]);
+  expect(juego.intentos).toBe(0);
+});
+
+test('Debe añadir letras incorrectas una sola vez y aumentar intentos', () => {
+  const palabras = ['javascript'];
+  const juego = new Ahorcado(palabras);
+  juego.adivinar('z');
+  juego.adivinar('z'); // Intento de adivinar la misma letra incorrecta
+  expect(juego.getEstado()).toBe('__________');
+  expect(juego.getLetrasIncorrectas()).toEqual(['z']);
+  expect(juego.intentos).toBe(1);
 });

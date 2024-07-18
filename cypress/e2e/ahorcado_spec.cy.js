@@ -26,14 +26,15 @@ describe('Juego de Ahorcado', () => {
     cy.get('#incorrect-letters').should('contain.text', 'z');
   });
 
-  it('debería indicar cuando el jugador ha ganado', () => {
-    const palabra = 'desarrollo';
-    for (let letra of palabra) {
+  it('debería indicar cuando el jugador ha ganado', () => {  
+    const correctLetters = ['d', 'e', 's', 'a', 'r', 'o', 'l'];
+    correctLetters.forEach((letra) => {
       cy.get('#guess-input').type(letra, { force: true });
       cy.get('#guess-button').click({ force: true });
-    }
+    });
     cy.get('#message').should('contain.text', '¡Has ganado!');
   });
+  
 
   it('debería indicar cuando el jugador ha perdido', () => {  
     const incorrectLetters = ['x', 'y', 'z', 'w', 'v', 'u'];
@@ -44,5 +45,25 @@ describe('Juego de Ahorcado', () => {
     cy.get('#message').should('contain.text', 'Has perdido');
   });
 
-});
+  it('no debería permitir ingresar números', () => {
+    cy.get('#guess-input').type('1');
+    cy.get('#guess-button').click();
+    cy.get('#incorrect-letters').should('not.contain.text', '1');
+    cy.get('#guess-input').should('have.value', '');
+  });
 
+  it('no debería permitir ingresar símbolos especiales', () => {
+    cy.get('#guess-input').type('@');
+    cy.get('#guess-button').click();
+    cy.get('#incorrect-letters').should('not.contain.text', '@');
+    cy.get('#guess-input').should('have.value', '');
+  });
+
+  it('no debería permitir letras repetidas', () => {
+    cy.get('#guess-input').type('a');
+    cy.get('#guess-button').click();
+    cy.get('#guess-input').type('a');
+    cy.get('#guess-button').click();
+    cy.get('#message').should('contain.text', 'Ya has adivinado esa letra. Intenta con otra.');
+  });
+});

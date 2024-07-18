@@ -4,8 +4,8 @@ class Ahorcado {
     this.palabra = palabraParaPrueba || this.seleccionarPalabra();
     this.estado = '_'.repeat(this.palabra.length);
     this.letrasIncorrectas = [];
+    this.letrasCorrectas = [];
     this.intentos = 0;
-    this.vidasRestantes = 6; // Inicializamos con 6 vidas
   }
 
   seleccionarPalabra() {
@@ -19,13 +19,21 @@ class Ahorcado {
 
   reiniciar() {
     this.palabra = this.seleccionarPalabra();
-    this.estado = '_'.repeat(this.palabra.length);
+    this.estado = Array(this.palabra.length).fill('_').join('');
     this.intentos = 0;
     this.letrasIncorrectas = [];
-    this.vidasRestantes = 6; // Reiniciamos las vidas a 6
+    this.letrasCorrectas = [];
   }
 
   adivinar(letra) {
+    if (!this.esLetraValida(letra)) {
+      return;
+    }
+
+    if (this.letrasCorrectas.includes(letra) || this.letrasIncorrectas.includes(letra)) {
+      return;
+    }
+
     if (this.palabra.includes(letra)) {
       let nuevoEstado = '';
       for (let i = 0; i < this.palabra.length; i++) {
@@ -36,11 +44,15 @@ class Ahorcado {
         }
       }
       this.estado = nuevoEstado;
+      this.letrasCorrectas.push(letra);
     } else {
       this.letrasIncorrectas.push(letra);
       this.intentos++;
-      this.vidasRestantes--; // Decrementamos las vidas restantes
     }
+  }
+
+  esLetraValida(letra) {
+    return /^[a-zA-Z]$/.test(letra);
   }
 
   getLetrasIncorrectas() {
@@ -52,14 +64,10 @@ class Ahorcado {
   }
 
   esPerdedor() {
-    return this.vidasRestantes <= 0; // Ajustamos la condición de derrota
+    return this.intentos >= 6; // 6 intentos incorrectos como límite
   }
 
   getVidasRestantes() {
-    return this.vidasRestantes;
+    return 6 - this.intentos; // Calcula las vidas restantes
   }
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = Ahorcado;
 }
