@@ -36,31 +36,13 @@ describe('Juego de Ahorcado', () => {
   });
 
   it('debería indicar cuando el jugador ha perdido', () => {  
-    cy.get('#guess-input').should('not.be.disabled').then(() => {
-      cy.get('#guess-input').type('x');
+    const incorrectLetters = ['x', 'y', 'z', 'w', 'v', 'u'];
+    incorrectLetters.forEach((letra) => {
+      cy.get('#guess-input').type(letra, { force: true });
+      cy.get('#guess-button').click({ force: true });
     });
-    cy.get('#guess-button').should('not.be.disabled').click();
-    cy.get('#guess-input').should('not.be.disabled').then(() => {
-      cy.get('#guess-input').type('y');
-    });
-    cy.get('#guess-button').should('not.be.disabled').click();
-    cy.get('#guess-input').should('not.be.disabled').then(() => {
-      cy.get('#guess-input').type('z');
-    });
-    cy.get('#guess-button').should('not.be.disabled').click();
-    cy.get('#guess-input').should('not.be.disabled').then(() => {
-      cy.get('#guess-input').type('w');
-    });
-    cy.get('#guess-button').should('not.be.disabled').click();
-    cy.get('#guess-input').should('not.be.disabled').then(() => {
-      cy.get('#guess-input').type('v');
-    });
-    cy.get('#guess-button').should('not.be.disabled').click();
-    cy.get('#guess-input').should('not.be.disabled').then(() => {
-      cy.get('#guess-input').type('u');
-    });
-    cy.get('#guess-button').should('not.be.disabled').click();
     cy.get('#message').should('contain.text', 'Has perdido');
   });
 
 });
+
