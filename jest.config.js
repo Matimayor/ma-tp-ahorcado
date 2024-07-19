@@ -1,9 +1,7 @@
-// jest.config.js
-
 module.exports = {
-  coverageDirectory: 'coverage', // Directorio donde se guardará el informe de cobertura
-  collectCoverage: true, // Activar la recolección de cobertura
+  coverageDirectory: 'coverage', 
+  collectCoverage: true, 
   coverageReporters: [
-    'text-summary', // Mostrar resumen de cobertura como texto
+    'text-summary', 
   ],
 };
