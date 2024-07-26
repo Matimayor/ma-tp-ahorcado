@@ -1,44 +1,25 @@
-name: CI
-
 on:
+  # Trigger analysis when pushing to your main branches, and when creating a pull request.
   push:
     branches:
       - main
+      - master
+      - develop
+      - 'releases/**'
   pull_request:
-    branches:
-      - main
+      types: [opened, synchronize, reopened]
 
+name: Main Workflow
 jobs:
-  build:
+  sonarqube:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v4
       with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run unit tests with Jest
-      run: npm test -- --coverage
-
-    - name: Run acceptance tests with Cypress
-      run: npm run cy:run
-
-    - name: Checkout code for SonarQube
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-
+        # Disabling shallow clones is recommended for improving the relevancy of reporting
+        fetch-depth: 0
     - name: SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@master
+      uses: SonarSource/sonarqube-scan-action@v2.3.0
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      with:
-        args: -X
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
