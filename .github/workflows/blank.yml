@@ -1,25 +1,20 @@
-name: Sonar Scan
-
+name: Build
 on:
   push:
     branches:
-      - sonarqube-setup
-  
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
-  build-and-analyze:
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Source
-        uses: actions/checkout@v4
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
-      - name: Build Project
-        run: mvn clean install -DskipTests
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master 
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: 'https://sonarcloud.io/'
