@@ -30,7 +30,13 @@ jobs:
     - name: Run acceptance tests with Cypress
       run: npm run cy:run
 
-    - name: Display coverage report
-      run: cat ./coverage/lcov-report/index.html
-      continue-on-error: true
+    - name: Checkout code for SonarQube
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

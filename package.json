@@ -9,10 +9,14 @@
   },
   "devDependencies": {
     "cypress": "^13.13.1",
-    "jest": "^27.0.0"
+    "jest": "^27.0.0",
+    "sonarqube-scanner": "^4.0.1"
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["text", "lcov"]
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ]
   }
 }
