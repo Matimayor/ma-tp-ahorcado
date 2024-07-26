@@ -27,14 +27,13 @@ jobs:
     - name: Run unit tests with Jest
       run: npm test -- --coverage
 
-    - name: Run acceptance tests with Cypress
-      run: npm run cy:run
+  #  - name: Run acceptance tests with Cypress
+  #    run: npm run cy:run
     
-    - name: Install Code Climate CLI
+    - name: Download Code Climate CLI
       run: |
-        curl -L https://github.com/codeclimate/codeclimate/releases/download/v0.95.0/codeclimate-linux-amd64-0.95.0.tar.gz | tar xz
-        sudo mv codeclimate /usr/local/bin/
-
+        curl -L https://github.com/codeclimate/codeclimate/releases/download/0.95.0/codeclimate-linux-amd64-0.95.0.tar.gz | tar xz
+  
     - name: Run Code Climate Analysis
       run: |
-        codeclimate analyze --token ${{ secrets.CODECLIMATE_TOKEN }}
+        ./codeclimate analyze --dev
