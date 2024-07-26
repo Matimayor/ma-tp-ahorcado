@@ -38,7 +38,7 @@ jobs:
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: http://localhost:9000
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       with:
         args: -X
