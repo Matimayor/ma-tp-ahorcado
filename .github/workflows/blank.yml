@@ -35,6 +35,13 @@ jobs:
       with:
         fetch-depth: 0  
 
+    - name: Install SonarCloud scanner
+      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+      shell: powershell
+      run: |
+        New-Item -Path .\.sonar\scanner -ItemType Directory
+        dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+    
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       env:
